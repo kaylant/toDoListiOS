@@ -8,9 +8,9 @@
 
 import UIKit
 
-var toDoList = [String]
+var toDoList = [String]()
 
-class FirstViewController: UIViewController {
+class FirstViewController: UIViewController, UITableViewDelegate {
 
     @IBOutlet var toDoListTable: UITableView!
     
@@ -22,6 +22,30 @@ class FirstViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return toDoList.count
+        
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell")
+        
+        cell.textLabel?.text = toDoList[indexPath.row]
+        
+        return cell
+        
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        toDoListTable.reloadData()
+        
     }
 
 
